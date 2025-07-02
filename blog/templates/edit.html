@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <style>
+        body {
+            background-color: #f9f9f9;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            width: 450px;
+            margin: 20px auto;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            border-radius: 5px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        textarea {
+            height: 300px;
+            resize: vertical;
+        }
+    </style>
+
+  <h2>Edit Post</h2>
+  <form method="POST" enctype="multipart/form-data">
+    {% if success %}
+        <p style="background: #d4edda; color: #155724; padding: 10px; border-radius: 5px;">{{ success }}</p>
+    {% endif %}
+    {% if error %}
+    <p style="background: #f8d7da; color: #721c24; padding: 10px; border-radius: 5px;">{{ error }}</p>
+    {% endif %}
+    {% csrf_token %}
+    <label for="title">Title:</label><br>
+    <input type="text" id="title" name="title" value="{{ title }}"><br>
+    <label for="content">Content:</label><br>
+    <textarea id="content" name="content">{{ content }}</textarea><br>
+
+    <label for="image">Image:</label><br>
+    <input type="file" id="image" name="image" accept="image/*"><br>
+
+    {% if post_image %}
+        <img src="{{ post_image.url }}" alt="Post Image" style="max-width: 100%; height: auto; border-radius: 5px;"><br><br>
+    {% endif %}
+
+    <input type="submit" value="Update Post">
+  </form>
+<p style="text-align: center;"><a style="text-decoration: none; background: #007bff; padding: 10px 15px; border-radius: 5px; color: white;" href="{% url 'view' %}">View All Posts</a></p>
+{% endblock %}

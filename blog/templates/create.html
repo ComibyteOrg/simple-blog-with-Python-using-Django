@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block title %}Create Post{% endblock %}
+
+{% block content %}
+    <style>
+        body{
+            background-color: #f9f9f9;
+        }
+        .welcome {
+            text-align: center;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+        .welcome h1 {
+            font-size: 2.5em;
+            color: #333;
+        }
+        .welcome form {
+            width: 450px;
+            margin-top: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px; 
+        }
+        .welcome form div {
+            margin-bottom: 15px;
+        }
+        .welcome form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            text-align: left;
+        }
+        .welcome form input,
+        .welcome form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: none;
+        }
+        .welcome form input:focus,
+        .welcome form textarea:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        .welcome form button {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+        .welcome form button:hover {
+            background-color: #0056b3;
+        }
+        .welcome form button[type="submit"] {
+            width: 100%;
+        }
+    </style>
+
+
+    <div class="welcome">
+        <h1>Create a New Post</h1>
+        <form method="POST" novalidate enctype="multipart/form-data">
+            <!-- Use the csrf_token for security -->
+            {% csrf_token %}
+
+            {% if error %}
+                <div style="background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; padding: 20px; border-radius: 5px;">{{ error }}</div>
+            {% endif %}
+
+            <div>
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" placeholder="Enter post title" required value="{{ title }}">
+            </div>
+            <div>
+                <label for="content">Content:</label>
+                <textarea id="content" name="content" rows="10" placeholder="Enter post content" required>{{ content }}</textarea>
+            </div>
+            <div>
+                <label for="image">Image:</label>
+                <input type="file" id="image" name="image" accept="image/*">
+            </div>
+            <button type="submit">Publish</button>
+        </form>
+    </div>
+{% endblock %}

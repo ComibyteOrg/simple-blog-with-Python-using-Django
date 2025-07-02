@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+    <style>
+        .welcome {
+            text-align: center;
+            margin-top: 50px;
+            height: 60vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .welcome h1 {
+            font-size: 2.5em;
+            color: #333;
+        }
+        .welcome p {
+            font-size: 1.2em;
+            color: #666;
+        }
+        .welcome .buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .welcome .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 0 10px;
+        }
+        .welcome .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+    <div class="welcome">
+       <div class="div">
+            <h1>Welcome to Blogger</h1>
+            <p>This is a simple blogging platform built with Django.</p>
+            <p>Feel free to explore and create your own posts!</p>
+            <div class="buttons">
+                <a href="{% url 'create' %}" class="btn">Create Post</a>
+                <a href="{% url 'view' %}" class="btn">View Posts</a>
+            </div>
+       </div>
+    </div>
+{% endblock %}
+
+
+
